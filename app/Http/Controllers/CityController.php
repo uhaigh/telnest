@@ -9,17 +9,24 @@ class CityController extends Controller
 {
     public function index()
     {
-        return view('City.index');
+        $cities = City::all();
+        return view('City.index', compact('cities'));
     }
 
     public function create()
     {
-        return 'ini halaman untukmenampilkan formulir data';
+        return view('City.create');
     }
 
     public function store(Request $request)
     {
-        //
+        $city = new City;
+        $city->name = $request->name;
+        $city->photo = 'photo.jpg';
+        $city->save();
+        
+        return redirect('/City');
+
     } 
 
     public function show(City $city)
